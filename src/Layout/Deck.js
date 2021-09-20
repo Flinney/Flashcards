@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Deck({ deck }) {
+function Deck({ deck, deleteDeck, setCurrentDecks }) {
   function deleteDeckHandler() {
     if (!window.confirm("Are you sure you want to delete?")) {
       return;
     }
     console.log("deleted");
+    deleteDeck(deck.id);
   }
   const content = (
     <div className="col-12 m-2">
@@ -15,7 +16,7 @@ function Deck({ deck }) {
           <h5 className="card-title">{deck.name}</h5>
           <p className="card-text">{deck.description}</p>
           <Link
-            to={`/decks/${deck.id}/edit`}
+            to={`/decks/${deck.id}`}
             role="button"
             className="btn btn-seconday"
           >
@@ -28,7 +29,10 @@ function Deck({ deck }) {
           >
             <span className="oi oi-book mr-1"></span>Study
           </Link>
-          <button onClick={deleteDeckHandler} className="btn btn-danger">
+          <button
+            onClick={deleteDeckHandler}
+            className="btn btn-danger float-right"
+          >
             <span className="oi oi-trash"></span>
           </button>
         </div>

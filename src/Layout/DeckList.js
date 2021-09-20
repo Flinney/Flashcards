@@ -1,12 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { listCards, listDecks, deleteDeck } from "../utils/api";
+import { useEffect } from "react";
+import { listDecks, deleteDeck } from "../utils/api";
 import Deck from "./Deck";
 
-function DeckList() {
-  const [currentDecks, setCurrentDecks] = useState([]);
+function DeckList({ currentDecks, setCurrentDecks }) {
   useEffect(() => {
-    setCurrentDecks([]);
     const abortController = new AbortController();
 
     async function loadDecks() {
@@ -17,10 +15,15 @@ function DeckList() {
     loadDecks();
 
     return () => abortController.abort();
-  }, []);
-  console.log(currentDecks);
+  }, [setCurrentDecks]);
+
   const deckCards = currentDecks.map((deck) => (
-    <Deck deck={deck} key={deck.id} />
+    <Deck
+      deck={deck}
+      key={deck.id}
+      deleteDeck={deleteDeck}
+      setCurrentDecks={setCurrentDecks}
+    />
   ));
 
   return <>{deckCards}</>;

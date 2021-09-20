@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DeckList from "./DeckList";
 
 function Home() {
+  const [currentDecks, setCurrentDecks] = useState([]);
   return (
     <>
       <div className="row">
@@ -12,7 +13,10 @@ function Home() {
           </Link>
         </div>
         <div className="row">
-          <DeckList />
+          <DeckList
+            currentDecks={currentDecks}
+            setCurrentDecks={setCurrentDecks}
+          />
         </div>
       </div>
     </>
