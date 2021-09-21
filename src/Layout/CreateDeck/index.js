@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { createDeck } from "../../utils/api";
 import Form from "../Form";
 
 function CreateDeck({ setCurrentDecks }) {
@@ -11,10 +12,15 @@ function CreateDeck({ setCurrentDecks }) {
   }
   function deckTextChange(event) {
     setDeckText(event.target.value);
-    console.log(deckText);
   }
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(deckName, deckText);
+    createDeck({ name: deckName, description: deckText }).then((deck) =>
+        setCurrentDecks((prevState) => [...prevState, deck]),
+        setDeckName(""),
+        setDeckText("")
+    );
 
     return null;
   }

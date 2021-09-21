@@ -19,7 +19,7 @@ function Deck({ deck, deleteDeck, setCurrentDecks }) {
           <h5 className="card-title">
             {deck.name}{" "}
             <span className="card-title float-right">
-              {deck.cards.length} cards
+              {deck?.cards?.length} cards
             </span>
           </h5>
 
