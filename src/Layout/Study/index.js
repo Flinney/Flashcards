@@ -57,11 +57,7 @@ function Study() {
       </div>
       <AddMoreCards
         studyDeck={studyDeck}
-        studyCards={studyCards}
-        front={front}
-        setFront={setFront}
-        cardPlace={cardPlace}
-        setCardPlace={setCardPlace}
+        deckId={deckId}
       />
       <StudySession
         studyDeck={studyDeck}

@@ -16,7 +16,7 @@ function StudySession({
 
   return (
     <div className="row">
-      <h1 className="col-12">{`Study: ${studyDeck.name}`}</h1>
+      <h1 className="col-12">{`${studyDeck.name}: Study `}</h1>
       <div className="col col-md-5">
         <StudyCard
           studyCards={studyCards}
