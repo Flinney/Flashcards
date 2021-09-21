@@ -16,7 +16,13 @@ function Deck({ deck, deleteDeck, setCurrentDecks }) {
     <div className="col-12 m-2">
       <div className="card w-50">
         <div className="card-body">
-          <h5 className="card-title">{deck.name}</h5>
+          <h5 className="card-title">
+            {deck.name}{" "}
+            <span className="card-title float-right">
+              {deck.cards.length} cards
+            </span>
+          </h5>
+
           <p className="card-text">{deck.description}</p>
           <Link
             to={`/decks/${deck.id}`}

@@ -1,13 +1,33 @@
 import React from "react";
+import StudyCard from "./StudyCard";
 
-function StudySession({ studyDeck }) {
-  if (!studyDeck) {
+function StudySession({
+  studyDeck,
+  studyCards,
+  front,
+  setFront,
+  cardPlace,
+  setCardPlace,
+}) {
+  if (studyDeck.cards?.length < 3) {
     return null;
   }
-  if (studyDeck.cards.length < 2) {
-    return null;
-  }
-  return <p>You got enough cards</p>;
+  console.log(front);
+
+  return (
+    <div className="row">
+      <h1 className="col-12">{`Study: ${studyDeck.name}`}</h1>
+      <div className="col col-md-5">
+        <StudyCard
+          studyCards={studyCards}
+          front={front}
+          setFront={setFront}
+          cardPlace={cardPlace}
+          setCardPlace={setCardPlace}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default StudySession;

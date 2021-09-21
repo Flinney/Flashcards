@@ -10,29 +10,36 @@ function DeckView() {
 
     async function loadDeck() {
       const response = await readDeck(deckId, abortController.signal);
-      setStudyDeck(response);
-      console.log(viewingDeck);
+      setStudyDeck((prevDeck) => response);
     }
     loadDeck();
 
     return () => abortController.abort();
-  }, []);
+  }, [deckId]);
 
   return (
     <>
       <div className="row">
-        <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <Link to="/">
-                <span className="oi oi-home mr-1"></span>Home
-              </Link>
-            </li>
-            <li className="breadcrumb-item active" aria-current="page"></li>
-          </ol>
-        </nav>
+        <div className="col">
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to="/">
+                  <span className="oi oi-home mr-1"></span>Home
+                </Link>
+              </li>
+              <li className="breadcrumb-item active" aria-current="page">
+                {viewingDeck.name}
+              </li>
+            </ol>
+          </nav>
+        </div>
       </div>
-      <div className="row"></div>
+      <div className="row">
+        <div className="col">
+          
+        </div>
+      </div>
     </>
   );
 }
