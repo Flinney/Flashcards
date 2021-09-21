@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { listDecks, deleteDeck } from "../utils/api";
+import { listDecks, deleteDeck } from "../../utils/api";
 import Deck from "./Deck";
 
 function DeckList({ currentDecks, setCurrentDecks }) {
@@ -9,7 +9,7 @@ function DeckList({ currentDecks, setCurrentDecks }) {
 
     async function loadDecks() {
       const response = await listDecks(abortController.signal);
-      setCurrentDecks(response);
+      setCurrentDecks((prevState) => response);
     }
 
     loadDecks();

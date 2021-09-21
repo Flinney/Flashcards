@@ -8,6 +8,9 @@ function Deck({ deck, deleteDeck, setCurrentDecks }) {
     }
     console.log("deleted");
     deleteDeck(deck.id);
+    setCurrentDecks((prevState) =>
+      prevState.filter((prevDeck) => prevDeck.id !== deck.id)
+    );
   }
   const content = (
     <div className="col-12 m-2">

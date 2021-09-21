@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DeckList from "./DeckList";
 
-function Home() {
-  const [currentDecks, setCurrentDecks] = useState([]);
+function Home({ currentDecks, setCurrentDecks }) {
   return (
     <>
       <div className="row">
