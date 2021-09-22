@@ -101,7 +101,11 @@ function DeckView({ setCurrentDecks }) {
               >
                 <span className="oi oi-book mr-2"></span>Study
               </Link>
-              <Link to={`/`} role="button" className="btn btn-primary">
+              <Link
+                to={`/decks/${deckId}/cards/new`}
+                role="button"
+                className="btn btn-primary"
+              >
                 <span className="oi oi-plus mr-1"></span>Add Cards
               </Link>
               <button

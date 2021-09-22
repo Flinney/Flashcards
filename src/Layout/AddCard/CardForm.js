@@ -1,6 +1,6 @@
 import React from "react";
 
-function Form({
+function CardForm({
   formName,
   formNameChange,
   formText,
@@ -17,27 +17,27 @@ function Form({
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-3">
-        <label htmlFor="name" className="form-label">
+        <label htmlFor="frontofcardtext" className="form-label">
           {inputName}
         </label>
-        <input
+        <textarea
           type="text"
-          name="name"
+          name="front"
           className="form-control"
-          id="name"
+          id="frontofcardtext"
           placeholder={nameDesc}
           value={formName}
           onChange={formNameChange}
         />
       </div>
       <div className="mb-3">
-        <label htmlFor="textdescription" className="form-label">
+        <label htmlFor="backofcardtext" className="form-label">
           {textAreaName}
         </label>
         <textarea
           className="form-control mb-1"
-          name="description"
-          id="textdescription"
+          name="back"
+          id="backofcardtext"
           rows="3"
           placeholder={textDesc}
           onChange={formTextChange}
@@ -57,4 +57,4 @@ function Form({
     </form>
   );
 }
-export default Form;
+export default CardForm;

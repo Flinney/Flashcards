@@ -16,10 +16,10 @@ function CreateDeck({ setCurrentDecks }) {
   function handleSubmit(event) {
     event.preventDefault();
     console.log(deckName, deckText);
-    createDeck({ name: deckName, description: deckText }).then((deck) =>
-        setCurrentDecks((prevState) => [...prevState, deck]),
-        setDeckName(""),
-        setDeckText("")
+    createDeck({ name: deckName, description: deckText }).then(
+      (deck) => setCurrentDecks((prevState) => [...prevState, deck]),
+      setDeckName(""),
+      setDeckText("")
     );
 
     return null;
@@ -57,6 +57,10 @@ function CreateDeck({ setCurrentDecks }) {
             nameDesc={`Deck Name`}
             textDesc={`Brief description of the deck`}
             handleSubmit={handleSubmit}
+            inputName={`Name`}
+            textAreaName={"Description"}
+            buttonName={`Cancel`}
+            submitButtonName={`Submit`}
           />
         </div>
       </div>

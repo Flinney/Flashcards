@@ -1,30 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { readDeck } from "../../utils/api";
-import { updateDeck } from "../../utils/api";
-import Form from "../Form";
+import { createCard, readDeck } from "../../utils/api";
+import CardForm from "./CardForm";
 
-function EditDeck() {
+function AddCard() {
   const { deckId } = useParams();
   const history = useHistory();
-  const initialFormData = { name: "", description: "" };
+  const initialFormData = { front: "", back: "", deckId: deckId };
   const [deckToEdit, setDeckToEdit] = useState({});
   const [formData, setFormData] = useState({ ...initialFormData });
 
   function handleFormChange(event) {
+    console.log(formData);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
+    console.log(formData);
   }
 
-  function handleCancel() {
-    history.push(`/decks/${deckToEdit.id}`);
+  function handleDone() {
+    history.push(`/decks/${deckId}`);
   }
 
-  function handleSubmit(event) {
+  function handleSave(event) {
     event.preventDefault();
-    updateDeck({ ...formData, id: deckToEdit.id });
+    createCard(deckId, { ...formData }).then((card) =>
+      setFormData({ ...initialFormData })
+    );
   }
 
   useEffect(() => {
@@ -38,6 +41,7 @@ function EditDeck() {
 
     return () => abortController.abort();
   }, [deckId]);
+
   return (
     <>
       <div className="row">
@@ -50,28 +54,31 @@ function EditDeck() {
                 </Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                Edit Deck
+                {deckToEdit.name}
+              </li>
+              <li className="breadcrumb-item " aria-current="page">
+                Add Card
               </li>
             </ol>
           </nav>
         </div>
       </div>
       <div className="row">
-        <h1 className="col-12">Edit Deck</h1>
+        <h1 className="col-12">{`${deckToEdit.name}: Add Card`}</h1>
         <div className="col-6">
-          <Form
-            formName={formData.name}
+          <CardForm
+            formName={formData.front}
             formNameChange={handleFormChange}
-            formText={formData.description}
+            formText={formData.back}
             formTextChange={handleFormChange}
-            handleCancel={handleCancel}
-            nameDesc={deckToEdit.name}
-            textDesc={deckToEdit.description}
-            handleSubmit={handleSubmit}
-            inputName={`Name`}
-            textAreaName={"Description"}
-            buttonName={`Cancel`}
-            submitButtonName={`Submit`}
+            handleCancel={handleDone}
+            nameDesc={"Front side of card"}
+            textDesc={"Back side of card"}
+            handleSubmit={handleSave}
+            inputName={`Front`}
+            textAreaName={"Back"}
+            buttonName={`Done`}
+            submitButtonName={`Save`}
           />
         </div>
       </div>
@@ -79,4 +86,4 @@ function EditDeck() {
   );
 }
 
-export default EditDeck;
+export default AddCard;
