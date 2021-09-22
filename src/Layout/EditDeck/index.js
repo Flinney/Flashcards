@@ -4,7 +4,7 @@ import { readDeck } from "../../utils/api";
 import { updateDeck } from "../../utils/api";
 import Form from "../Form";
 
-function EditDeck() {
+function EditDeck({ setCurrentDecks }) {
   const { deckId } = useParams();
   const history = useHistory();
   const initialFormData = { name: "", description: "" };
@@ -25,6 +25,7 @@ function EditDeck() {
   function handleSubmit(event) {
     event.preventDefault();
     updateDeck({ ...formData, id: deckToEdit.id });
+    history.push(`/decks/${deckId}`);
   }
 
   useEffect(() => {
@@ -38,6 +39,10 @@ function EditDeck() {
 
     return () => abortController.abort();
   }, [deckId]);
+
+  if (!deckToEdit.id) {
+    return "Loading...";
+  }
   return (
     <>
       <div className="row">
@@ -50,14 +55,14 @@ function EditDeck() {
                 </Link>
               </li>
               <li className="breadcrumb-item active" aria-current="page">
-                Edit Deck
+                <Link to={`/decks/${deckId}`}>Deck {deckToEdit.name}</Link>
               </li>
             </ol>
           </nav>
         </div>
       </div>
       <div className="row">
-        <h1 className="col-12">Edit Deck</h1>
+        <h1 className="col-12">{`${deckToEdit.name}`}</h1>
         <div className="col-6">
           <Form
             formName={formData.name}

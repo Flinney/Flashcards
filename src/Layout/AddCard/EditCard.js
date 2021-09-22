@@ -29,11 +29,26 @@ function EditCard() {
     history.push(`/decks/${deckId}`);
   }
 
-  function handleSave(event) {
+  /*function handleSave(event) {
     event.preventDefault();
     updateCard(formData);
     history.push(`/decks/${deckId}`);
-  }
+  }*/
+
+  const handleSave = (event) => {
+    event.preventDefault();
+    cardToEdit.front = formData.front;
+    cardToEdit.back = formData.back;
+
+    const ac = new AbortController();
+
+    async function editCard() {
+      await updateCard(cardToEdit, ac.signal);
+      setCardToEdit(cardToEdit);
+    }
+    editCard();
+    history.push(`/decks/${deckId}`);
+  };
 
   useEffect(() => {
     const abortController = new AbortController();

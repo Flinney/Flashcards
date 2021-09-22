@@ -1,41 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { deleteCard } from "../../utils/api";
 
-function CardView({ setCardList, deckId, cardId, front, back }) {
+function CardView({ deckId, cardId, front, back }) {
+  const history = useHistory();
+
   function deleteCardHandler() {
     if (!window.confirm("Are you sure you want to delete?")) {
       return;
     }
     console.log("deleted");
-    deleteCard(cardId).then((ig) =>
-      setCardList((prevState) => prevState.filter((item) => item.id !== cardId))
-    );
+    const ac = new AbortController();
+    async function removeCard() {
+      await deleteCard(cardId, ac.signal);
+      history.push(`/`);
+    }
+    removeCard();
   }
   return (
-    <div className="col-7">
-      <div className="card">
-        <div className="card-body">
-          <div className="float-left w-50">
-            <p className="card-text text-align-left wrap">{front}</p>
-          </div>
-          <div className="float-right w-50 pr-1">
-            <p className="card-text text-align-right wrap">{back}</p>
-          </div>
+    <div className="card">
+      <div className="card-body">
+        <div className="col-6 float-left">
+          <p>{front}</p>
+        </div>
+        <div className="col-6 float-right">
+          <p>{back}</p>
         </div>
         <div>
           <button
-            onClick={deleteCardHandler}
             className="btn btn-danger float-right"
+            onClick={deleteCardHandler}
           >
             <span className="oi oi-trash"></span>
           </button>
-          <Link
-            role="button"
-            to={`/decks/${deckId}/cards/${cardId}/edit`}
-            className="btn btn-secondary float-right"
-          >
-            <span className="oi oi-pencil mr-1"></span>Edit
+          <Link to={`${deckId}/cards/${cardId}/edit`}>
+            <button className="btn btn-secondary float-right">
+              <span className="oi oi-pencil mr-2"></span>
+              Edit
+            </button>
           </Link>
         </div>
       </div>

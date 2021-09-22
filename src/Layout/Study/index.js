@@ -7,7 +7,6 @@ import AddMoreCards from "./AddMoreCards";
 
 function Study() {
   const [studyDeck, setStudyDeck] = useState({});
-  const [studyCards, setStudyCards] = useState([]);
   const [front, setFront] = useState(true);
   const [cardPlace, setCardPlace] = useState(1);
 
@@ -24,17 +23,11 @@ function Study() {
     return () => abortController.abort();
   }, [deckId]);
 
-  useEffect(() => {
-    const abortController = new AbortController();
+  const cardsFromDeck = studyDeck.cards;
 
-    async function loadCards() {
-      const response = await listCards(deckId, abortController.signal);
-      setStudyCards((prevCards) => response);
-    }
-    loadCards();
-
-    return () => abortController.abort();
-  }, [deckId]);
+  if (!studyDeck.id) {
+    return "Loading...";
+  }
 
   return (
     <>
@@ -55,13 +48,10 @@ function Study() {
           </nav>
         </div>
       </div>
-      <AddMoreCards
-        studyDeck={studyDeck}
-        deckId={deckId}
-      />
+      <AddMoreCards studyDeck={studyDeck} deckId={deckId} />
       <StudySession
         studyDeck={studyDeck}
-        studyCards={studyCards}
+        studyCards={cardsFromDeck}
         front={front}
         setFront={setFront}
         cardPlace={cardPlace}

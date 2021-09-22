@@ -5,7 +5,6 @@ import CardView from "./CardView";
 
 function DeckView({ setCurrentDecks }) {
   const [viewingDeck, setViewingDeck] = useState({});
-  const [cardList, setCardList] = useState([]);
   const { deckId } = useParams();
   const history = useHistory();
   useEffect(() => {
@@ -16,18 +15,6 @@ function DeckView({ setCurrentDecks }) {
       setViewingDeck((prevDeck) => response);
     }
     loadDeck();
-
-    return () => abortController.abort();
-  }, [deckId]);
-
-  useEffect(() => {
-    const abortController = new AbortController();
-
-    async function loadCards() {
-      const response = await listCards(deckId, abortController.signal);
-      setCardList((prevState) => response);
-    }
-    loadCards();
 
     return () => abortController.abort();
   }, [deckId]);
@@ -46,9 +33,8 @@ function DeckView({ setCurrentDecks }) {
     );
   }
 
-  const viewingDeckCards = cardList.map((card) => (
+  const viewingDeckCards = viewingDeck.cards?.map((card) => (
     <CardView
-      setCardList={setCardList}
       deckId={deckId}
       cardId={card.id}
       front={card.front}
@@ -56,6 +42,10 @@ function DeckView({ setCurrentDecks }) {
       key={card.id}
     />
   ));
+
+  if (!viewingDeck.id) {
+    return "Loading...";
+  }
 
   return (
     <>
@@ -120,7 +110,9 @@ function DeckView({ setCurrentDecks }) {
       </div>
       <div className="row">
         <h3 className="col-12">Cards</h3>
-        <div>{viewingDeckCards}</div>
+      </div>
+      <div className="row">
+        <div className="col-8">{viewingDeckCards}</div>
       </div>
     </>
   );

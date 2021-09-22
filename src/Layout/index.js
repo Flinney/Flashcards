@@ -31,7 +31,7 @@ function Layout() {
             <Study />
           </Route>
           <Route exact path="/decks/:deckId/edit">
-            <EditDeck />
+            <EditDeck setCurrentDecks={setCurrentDecks}/>
           </Route>
           <Route exact path="/decks/:deckId/cards/new">
             <AddCard />
