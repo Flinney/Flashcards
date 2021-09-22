@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { listCards, readDeck, deleteDeck } from "../../utils/api";
+import { readDeck, deleteDeck } from "../../utils/api";
 import { Link, useParams, useHistory } from "react-router-dom";
 import CardView from "./CardView";
 

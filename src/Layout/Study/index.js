@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { readDeck, listCards } from "../../utils/api";
+import { readDeck } from "../../utils/api";
 import { useEffect, useState } from "react";
 import StudySession from "./StudySession";
 import AddMoreCards from "./AddMoreCards";
