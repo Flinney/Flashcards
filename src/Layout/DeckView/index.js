@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { deleteCard, listCards, readDeck, deleteDeck } from "../../utils/api";
+import { listCards, readDeck, deleteDeck } from "../../utils/api";
 import { Link, useParams, useHistory } from "react-router-dom";
 import CardView from "./CardView";
 
 function DeckView({ setCurrentDecks }) {
-  const [viewingDeck, setStudyDeck] = useState({});
+  const [viewingDeck, setViewingDeck] = useState({});
   const [cardList, setCardList] = useState([]);
   const { deckId } = useParams();
   const history = useHistory();
@@ -13,7 +13,7 @@ function DeckView({ setCurrentDecks }) {
 
     async function loadDeck() {
       const response = await readDeck(deckId, abortController.signal);
-      setStudyDeck((prevDeck) => response);
+      setViewingDeck((prevDeck) => response);
     }
     loadDeck();
 
@@ -46,21 +46,14 @@ function DeckView({ setCurrentDecks }) {
     );
   }
 
-  function deleteCardHandler(cardId) {
-    if (!window.confirm("Are you sure you want to delete?")) {
-      return;
-    }
-    console.log("deleted");
-    deleteCard(cardId).then((ig) =>
-      setCardList((prevState) => prevState.filter((item) => item.id !== cardId))
-    );
-  }
   const viewingDeckCards = cardList.map((card) => (
     <CardView
-      deleteCardHandler={deleteCardHandler}
+      setCardList={setCardList}
+      deckId={deckId}
       cardId={card.id}
       front={card.front}
       back={card.back}
+      key={card.id}
     />
   ));
 

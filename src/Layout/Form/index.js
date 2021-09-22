@@ -32,7 +32,8 @@ function Form({
         </label>
         <textarea
           className="form-control mb-1"
-          id="exampleFormControlTextarea1"
+          name="description"
+          id="textdescription"
           rows="3"
           placeholder={textDesc}
           onChange={formTextChange}
