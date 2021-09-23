@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../../utils/api";
-import CardForm from "./CardForm";
+import CardForm from "../CardForm";
 
 function EditCard() {
   const { deckId, cardId } = useParams();
@@ -17,25 +17,17 @@ function EditCard() {
   const [formData, setFormData] = useState({ ...initialFormData });
 
   function handleFormChange(event) {
-    console.log(formData);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
-    console.log(formData);
   }
 
-  function handleDone() {
+  function handleCancel() {
     history.push(`/decks/${deckId}`);
   }
 
-  /*function handleSave(event) {
-    event.preventDefault();
-    updateCard(formData);
-    history.push(`/decks/${deckId}`);
-  }*/
-
-  const handleSave = (event) => {
+  function handleSubmit(event) {
     event.preventDefault();
     cardToEdit.front = formData.front;
     cardToEdit.back = formData.back;
@@ -43,12 +35,12 @@ function EditCard() {
     const ac = new AbortController();
 
     async function editCard() {
-      await updateCard(cardToEdit, ac.signal);
-      setCardToEdit(cardToEdit);
+      const editedCard = await updateCard(cardToEdit, ac.signal);
+      setCardToEdit(editedCard);
+      history.push(`/decks/${deckId}`);
     }
     editCard();
-    history.push(`/decks/${deckId}`);
-  };
+  }
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -71,6 +63,10 @@ function EditCard() {
     }
     loadCard();
   }, [cardId]);
+
+  if (!deckToEdit.id) {
+    return null;
+  }
 
   return (
     <>
@@ -101,14 +97,14 @@ function EditCard() {
             formNameChange={handleFormChange}
             formText={formData.back}
             formTextChange={handleFormChange}
-            handleCancel={handleDone}
+            handleCancel={handleCancel}
             nameDesc={cardToEdit?.front}
             textDesc={cardToEdit?.back}
-            handleSubmit={handleSave}
+            handleSubmit={handleSubmit}
             inputName={`Front`}
             textAreaName={"Back"}
-            buttonName={`Done`}
-            submitButtonName={`Save`}
+            buttonName={`Cancel`}
+            submitButtonName={`Submit`}
           />
         </div>
       </div>

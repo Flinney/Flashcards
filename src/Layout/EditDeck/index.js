@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { readDeck } from "../../utils/api";
 import { updateDeck } from "../../utils/api";
-import Form from "../Form";
+import Form from "../DeckForm";
 
 function EditDeck({ setCurrentDecks }) {
   const { deckId } = useParams();
