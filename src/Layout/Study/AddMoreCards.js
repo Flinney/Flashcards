@@ -5,6 +5,7 @@ function AddMoreCards({ studyDeck, deckId }) {
   if (studyDeck.cards?.length > 2) {
     return null;
   }
+
   return (
     <div className="row">
       <h1 className="col-12">{`${studyDeck.name}: Study `}</h1>

@@ -3,10 +3,6 @@ import { useHistory } from "react-router-dom";
 
 function StudyCard({ studyCards, front, setFront, cardPlace, setCardPlace }) {
   const history = useHistory();
-  
-  if (!studyCards || !cardPlace) {
-    return null;
-  }
 
   function flip() {
     setFront(!front);
