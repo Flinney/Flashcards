@@ -3,6 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 import { createDeck } from "../../utils/api";
 import Form from "../DeckForm";
 
+/**
+ * Creates and manages state for a new deck. Passes necessary props to @DeckForm in order to render the proper form data.
+ * Custom change and button handlers are passed. 
+ * 
+ */
+
 function CreateDeck({ setCurrentDecks }) {
   const history = useHistory();
   

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DeckList from "./DeckList";
 
+//HomePage takes and passes deck list state to child components.
+
 function Home({ currentDecks, setCurrentDecks }) {
   return (
     <>

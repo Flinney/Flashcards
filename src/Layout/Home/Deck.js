@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/**
+ * Creates JSX for each deck with a delete button.
+ * Delete button will remove deck from DB and update
+ * the deck list state set in Layout.
+ *
+ */
+
 function Deck({ deck, deleteDeck, setCurrentDecks }) {
   function deleteDeckHandler() {
     if (!window.confirm("Are you sure you want to delete?")) {
       return;
     }
-    console.log("deleted");
     deleteDeck(deck.id);
     setCurrentDecks((prevState) =>
       prevState.filter((prevDeck) => prevDeck.id !== deck.id)

@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * Takes necessary props from @AddCard and @EditCard components in order to create the appropriate form as needed. 
+ * 
+ */
+
 function CardForm({
   formName,
   formNameChange,

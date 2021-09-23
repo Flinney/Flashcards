@@ -1,6 +1,8 @@
 import React from "react";
 import StudyCard from "./StudyCard";
 
+//minor JSX formatting before calling @StudyCard to render the card.
+
 function StudySession({
   studyDeck,
   studyCards,

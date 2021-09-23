@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//informs user of insufficient cards and provides button to add more.
+
 function AddMoreCards({ studyDeck, deckId }) {
   if (studyDeck.cards?.length > 2) {
     return null;

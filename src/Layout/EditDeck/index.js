@@ -4,11 +4,19 @@ import { readDeck } from "../../utils/api";
 import { updateDeck } from "../../utils/api";
 import Form from "../DeckForm";
 
-function EditDeck({ setCurrentDecks }) {
+/**
+ * Shares form with @CreateDeck component.
+ * @formData state is created and filled once @useEffect hook resolves.
+ * 
+ * Unique button handlers are used to update deck info or return home.
+ * 
+ */
+
+function EditDeck() {
   const { deckId } = useParams();
   const history = useHistory();
   const initialFormData = { name: "", description: "" };
-  
+
   const [deckToEdit, setDeckToEdit] = useState({});
   const [formData, setFormData] = useState({ ...initialFormData });
 
@@ -35,7 +43,7 @@ function EditDeck({ setCurrentDecks }) {
     async function loadDeck() {
       const response = await readDeck(deckId, abortController.signal);
       setDeckToEdit((prevDeck) => response);
-      setFormData(response)
+      setFormData(response);
     }
     loadDeck();
 

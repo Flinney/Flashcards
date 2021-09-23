@@ -2,6 +2,12 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 import { deleteCard } from "../../utils/api";
 
+/**
+ * Uses props to create JSX for individual cards in the @DeckView component.
+ * Button handler for deletion is created and a link to the @EditCard component is provided.
+ *
+ */
+
 function CardView({ deckId, cardId, front, back }) {
   const history = useHistory();
 
@@ -17,7 +23,7 @@ function CardView({ deckId, cardId, front, back }) {
     }
     removeCard();
   }
-  
+
   return (
     <li>
       <div className="card">

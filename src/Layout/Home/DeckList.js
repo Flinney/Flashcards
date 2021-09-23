@@ -3,6 +3,13 @@ import { useEffect } from "react";
 import { listDecks, deleteDeck } from "../../utils/api";
 import Deck from "./Deck";
 
+/**
+ * DeckList component with hook to render updated deck list.
+ * Maps through list and uses Deck component to render 
+ * JSX properly for each deck. 
+ * 
+ */
+
 function DeckList({ currentDecks, setCurrentDecks }) {
   useEffect(() => {
     const abortController = new AbortController();

@@ -11,6 +11,7 @@ import AddCard from "./AddCard";
 import EditCard from "./EditCard";
 
 function Layout() {
+  //entire deck list state managed at highest level. All routing done on Layout.
   const [currentDecks, setCurrentDecks] = useState([]);
   return (
     <>
@@ -31,7 +32,7 @@ function Layout() {
             <Study />
           </Route>
           <Route exact path="/decks/:deckId/edit">
-            <EditDeck setCurrentDecks={setCurrentDecks} />
+            <EditDeck />
           </Route>
           <Route exact path="/decks/:deckId/cards/new">
             <AddCard />

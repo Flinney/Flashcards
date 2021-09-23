@@ -5,6 +5,19 @@ import { useEffect, useState } from "react";
 import StudySession from "./StudySession";
 import AddMoreCards from "./AddMoreCards";
 
+/**
+ * Study initializes specific states to be referenced
+ * during a study session.
+ * @front is a boolean determines which card side is displayed.
+ * 
+ * @cardPlace is a number that determines which card is displayed.
+ * 
+ * @AddMoreCards is a component that only renders if a deck has insufficient cards.
+ * 
+ * @StudySession is a componenet that renders cards when studying. 
+ * 
+ */
+
 function Study() {
   const { deckId } = useParams();
 

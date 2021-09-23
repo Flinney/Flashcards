@@ -1,5 +1,12 @@
 import React from "react";
 
+/**
+ * @DeckForm component is accessed by both @CreateDeck and @EditDeck
+ * components. Props are inherited from either to fill form with correct placeholders, values, button names and button handlers. 
+ *
+ * 
+ */
+
 function Form({
   formName,
   formNameChange,

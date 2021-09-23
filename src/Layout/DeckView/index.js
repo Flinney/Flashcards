@@ -3,6 +3,13 @@ import { readDeck, deleteDeck } from "../../utils/api";
 import { Link, useParams, useHistory } from "react-router-dom";
 import CardView from "./CardView";
 
+/**
+ *Deck viewing page that inherits @setCurrentDecks state manager
+ in order to update deck list state as needed.
+ *JSX is created for most of the page, but props are passed to @CardView to render JSX for individual cards within the deck. 
+ *Deck state and params are created/managed at this level. 
+ */
+
 function DeckView({ setCurrentDecks }) {
   const { deckId } = useParams();
   const history = useHistory();
@@ -13,7 +20,6 @@ function DeckView({ setCurrentDecks }) {
     if (!window.confirm("Are you sure you want to delete?")) {
       return;
     }
-    console.log("deleted");
     deleteDeck(viewingDeck.id).then(
       (ig) =>
         setCurrentDecks((prevState) =>

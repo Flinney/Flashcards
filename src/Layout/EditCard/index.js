@@ -3,6 +3,16 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../../utils/api";
 import CardForm from "../CardForm";
 
+/**
+ * Shares @CardForm component with @AddCard
+ * passing down unique props as needed.
+ *
+ * deck, card, and @formData state are created and tracked.
+ *
+ * Unique button handlers process changes or route user away as needed.
+ *
+ */
+
 function EditCard() {
   const { deckId, cardId } = useParams();
   const history = useHistory();
