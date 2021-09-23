@@ -35,6 +35,7 @@ function EditDeck({ setCurrentDecks }) {
     async function loadDeck() {
       const response = await readDeck(deckId, abortController.signal);
       setDeckToEdit((prevDeck) => response);
+      setFormData(response)
     }
     loadDeck();
 

@@ -12,7 +12,7 @@ function EditCard() {
     back: "",
     deckId: deckId,
   };
-  
+
   const [deckToEdit, setDeckToEdit] = useState({});
   const [cardToEdit, setCardToEdit] = useState({});
   const [formData, setFormData] = useState({ ...initialFormData });
@@ -49,6 +49,7 @@ function EditCard() {
     async function loadDeck() {
       const response = await readDeck(deckId, abortController.signal);
       setDeckToEdit((prevDeck) => response);
+      setFormData(response);
     }
     loadDeck();
 
@@ -94,9 +95,9 @@ function EditCard() {
         <h1 className="col-12">Edit Card</h1>
         <div className="col-6">
           <CardForm
-            formName={formData.front}
+            formName={cardToEdit?.front}
             formNameChange={handleFormChange}
-            formText={formData.back}
+            formText={cardToEdit?.back}
             formTextChange={handleFormChange}
             handleCancel={handleCancel}
             nameDesc={cardToEdit?.front}
