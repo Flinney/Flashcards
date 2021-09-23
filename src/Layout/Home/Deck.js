@@ -12,7 +12,8 @@ function Deck({ deck, deleteDeck, setCurrentDecks }) {
       prevState.filter((prevDeck) => prevDeck.id !== deck.id)
     );
   }
-  const content = (
+
+  return (
     <div className="col-12 m-2">
       <div className="card w-50">
         <div className="card-body">
@@ -48,7 +49,6 @@ function Deck({ deck, deleteDeck, setCurrentDecks }) {
       </div>
     </div>
   );
-  return content;
 }
 
 export default Deck;

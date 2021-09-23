@@ -17,31 +17,34 @@ function CardView({ deckId, cardId, front, back }) {
     }
     removeCard();
   }
+  
   return (
-    <div className="card">
-      <div className="card-body">
-        <div className="col-6 float-left">
-          <p>{front}</p>
-        </div>
-        <div className="col-6 float-right">
-          <p>{back}</p>
-        </div>
-        <div>
-          <button
-            className="btn btn-danger float-right"
-            onClick={deleteCardHandler}
-          >
-            <span className="oi oi-trash"></span>
-          </button>
-          <Link to={`${deckId}/cards/${cardId}/edit`}>
-            <button className="btn btn-secondary float-right">
-              <span className="oi oi-pencil mr-2"></span>
-              Edit
+    <li>
+      <div className="card">
+        <div className="card-body">
+          <div className="col-6 float-left">
+            <p>{front}</p>
+          </div>
+          <div className="col-6 float-right">
+            <p>{back}</p>
+          </div>
+          <div>
+            <button
+              className="btn btn-danger float-right"
+              onClick={deleteCardHandler}
+            >
+              <span className="oi oi-trash"></span>
             </button>
-          </Link>
+            <Link to={`${deckId}/cards/${cardId}/edit`}>
+              <button className="btn btn-secondary float-right">
+                <span className="oi oi-pencil mr-2"></span>
+                Edit
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 }
 

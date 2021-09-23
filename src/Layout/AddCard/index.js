@@ -7,6 +7,7 @@ function AddCard() {
   const { deckId } = useParams();
   const history = useHistory();
   const initialFormData = { front: "", back: "", deckId: deckId };
+  
   const [deckToEdit, setDeckToEdit] = useState({});
   const [formData, setFormData] = useState({ ...initialFormData });
 
@@ -41,6 +42,10 @@ function AddCard() {
 
     return () => abortController.abort();
   }, [deckId]);
+
+  if (!deckToEdit.id) {
+    return null;
+  }
 
   return (
     <>

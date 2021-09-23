@@ -5,28 +5,38 @@ import Form from "../DeckForm";
 
 function CreateDeck({ setCurrentDecks }) {
   const history = useHistory();
+  
   const [deckName, setDeckName] = useState("");
   const [deckText, setDeckText] = useState("");
+
   function deckNameChange(event) {
     setDeckName(event.target.value);
   }
+
   function deckTextChange(event) {
     setDeckText(event.target.value);
   }
+
   function handleSubmit(event) {
     event.preventDefault();
-    console.log(deckName, deckText);
-    createDeck({ name: deckName, description: deckText }).then(
-      (deck) => setCurrentDecks((prevState) => [...prevState, deck]),
-      setDeckName(""),
-      setDeckText("")
-    );
 
-    return null;
+    async function saveDeck() {
+      const newDeck = await createDeck({
+        name: deckName,
+        description: deckText,
+      });
+      setCurrentDecks((prevState) => [...prevState, newDeck]);
+      setDeckName("");
+      setDeckText("");
+    }
+
+    saveDeck();
   }
+
   function handleCancel() {
     history.push("/");
   }
+
   return (
     <>
       <div className="row">

@@ -8,6 +8,7 @@ function EditDeck({ setCurrentDecks }) {
   const { deckId } = useParams();
   const history = useHistory();
   const initialFormData = { name: "", description: "" };
+  
   const [deckToEdit, setDeckToEdit] = useState({});
   const [formData, setFormData] = useState({ ...initialFormData });
 
@@ -41,8 +42,9 @@ function EditDeck({ setCurrentDecks }) {
   }, [deckId]);
 
   if (!deckToEdit.id) {
-    return "Loading...";
+    return null;
   }
+
   return (
     <>
       <div className="row">

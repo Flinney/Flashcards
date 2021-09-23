@@ -12,6 +12,7 @@ function EditCard() {
     back: "",
     deckId: deckId,
   };
+  
   const [deckToEdit, setDeckToEdit] = useState({});
   const [cardToEdit, setCardToEdit] = useState({});
   const [formData, setFormData] = useState({ ...initialFormData });

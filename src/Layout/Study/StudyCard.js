@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 
 function StudyCard({ studyCards, front, setFront, cardPlace, setCardPlace }) {
   const history = useHistory();
+  
   if (!studyCards || !cardPlace) {
     return null;
   }
@@ -10,6 +11,7 @@ function StudyCard({ studyCards, front, setFront, cardPlace, setCardPlace }) {
   function flip() {
     setFront(!front);
   }
+
   function next() {
     setFront(true);
     if (cardPlace === studyCards.length) {
@@ -18,6 +20,7 @@ function StudyCard({ studyCards, front, setFront, cardPlace, setCardPlace }) {
 
     return setCardPlace(cardPlace + 1);
   }
+
   const currentCard = studyCards[cardPlace - 1];
   const text = front ? currentCard?.front : currentCard?.back;
 

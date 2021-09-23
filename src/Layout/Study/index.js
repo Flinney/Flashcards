@@ -6,11 +6,12 @@ import StudySession from "./StudySession";
 import AddMoreCards from "./AddMoreCards";
 
 function Study() {
+  const { deckId } = useParams();
+
   const [studyDeck, setStudyDeck] = useState({});
   const [front, setFront] = useState(true);
   const [cardPlace, setCardPlace] = useState(1);
 
-  const { deckId } = useParams();
   useEffect(() => {
     const abortController = new AbortController();
 
@@ -26,7 +27,7 @@ function Study() {
   const cardsFromDeck = studyDeck.cards;
 
   if (!studyDeck.id) {
-    return "Loading...";
+    return null;
   }
 
   return (

@@ -4,20 +4,10 @@ import { Link, useParams, useHistory } from "react-router-dom";
 import CardView from "./CardView";
 
 function DeckView({ setCurrentDecks }) {
-  const [viewingDeck, setViewingDeck] = useState({});
   const { deckId } = useParams();
   const history = useHistory();
-  useEffect(() => {
-    const abortController = new AbortController();
 
-    async function loadDeck() {
-      const response = await readDeck(deckId, abortController.signal);
-      setViewingDeck((prevDeck) => response);
-    }
-    loadDeck();
-
-    return () => abortController.abort();
-  }, [deckId]);
+  const [viewingDeck, setViewingDeck] = useState({});
 
   function deleteDeckHandler() {
     if (!window.confirm("Are you sure you want to delete?")) {
@@ -33,6 +23,18 @@ function DeckView({ setCurrentDecks }) {
     );
   }
 
+  useEffect(() => {
+    const abortController = new AbortController();
+
+    async function loadDeck() {
+      const response = await readDeck(deckId, abortController.signal);
+      setViewingDeck((prevDeck) => response);
+    }
+    loadDeck();
+
+    return () => abortController.abort();
+  }, [deckId]);
+
   const viewingDeckCards = viewingDeck.cards?.map((card) => (
     <CardView
       deckId={deckId}
@@ -44,7 +46,7 @@ function DeckView({ setCurrentDecks }) {
   ));
 
   if (!viewingDeck.id) {
-    return "Loading...";
+    return null;
   }
 
   return (
@@ -112,7 +114,9 @@ function DeckView({ setCurrentDecks }) {
         <h3 className="col-12">Cards</h3>
       </div>
       <div className="row">
-        <div className="col-8">{viewingDeckCards}</div>
+        <div className="col-8">
+          <ul className="list-unstyled">{viewingDeckCards}</ul>
+        </div>
       </div>
     </>
   );

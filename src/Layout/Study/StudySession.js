@@ -12,7 +12,6 @@ function StudySession({
   if (studyDeck.cards?.length < 3) {
     return null;
   }
-  console.log(front);
 
   return (
     <div className="row">
