@@ -71,7 +71,8 @@ function EditCard() {
 
     async function loadCard() {
       const response = await readCard(cardId, ac.signal);
-      setCardToEdit((prevCard) => response);
+      setCardToEdit(response);
+      setFormData(response);
     }
     loadCard();
   }, [cardId]);
@@ -105,9 +106,9 @@ function EditCard() {
         <h1 className="col-12">Edit Card</h1>
         <div className="col-6">
           <CardForm
-            formName={cardToEdit?.front}
+            formName={formData.front}
             formNameChange={handleFormChange}
-            formText={cardToEdit?.back}
+            formText={formData.back}
             formTextChange={handleFormChange}
             handleCancel={handleCancel}
             nameDesc={cardToEdit?.front}
