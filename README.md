@@ -6,4 +6,4 @@ Flashcard app for study use. Capable of creating and editing decks, creating and
 
 ## Start
 
-Running `npm install` and `npm install` will load all the dependencies for the project and spin up two servers to test out the project with API requests.
+Running `npm install` and `npm start` will load all the dependencies for the project and spin up two servers to test out the project with API requests.
